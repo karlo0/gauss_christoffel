@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <float.h>
@@ -20,6 +19,7 @@
  */
 void discrete_gauss_christoffel_quadr(const size_t N, const double *w, const double *x, const double total_weight, const size_t L, double * nodes, double *weights){
 
+    int k;
     const int i_one = 1, i_zero = 0;
     const double d_zero = 0., d_one = 1.;
     const char opt = 'N';
@@ -30,7 +30,7 @@ void discrete_gauss_christoffel_quadr(const size_t N, const double *w, const dou
 
     double min_x; double max_x;
 
-    for(int k=0;k<N;k++){
+    for(k=0;k<N;k++){
         w_scal[k] = sqrt(w[k]);
         if(k==0){
             min_x = x[k];
@@ -47,7 +47,7 @@ void discrete_gauss_christoffel_quadr(const size_t N, const double *w, const dou
     double alpha = 0.9/(max_x - min_x);
     double beta = 0.1 - min_x*alpha;
 
-    for(int k = 0;k < N; k++)
+    for(k = 0;k < N; k++)
         x_scal[k] = alpha*x[k]+beta;
 
     double *beta_vec = (double *) malloc((L-1)*sizeof(double));
@@ -65,7 +65,7 @@ void discrete_gauss_christoffel_quadr(const size_t N, const double *w, const dou
 
     // determine weights from the eigenvectors stored in ev + 
     // scale and shift nodes back to the original support
-    for(int k = 0;k < L; k++){
+    for(k = 0;k < L; k++){
         nodes[k] = (nodes[k]-beta)/alpha;
         weights[k] = ev[k*L]*ev[k*L]*total_weight;
     }
@@ -114,6 +114,7 @@ void discrete_gauss_christoffel_quadr_pre_diag(const size_t N, const double *w, 
 */
 void arnoldi_ddiag(const size_t N, const double *H, const double *state0, const size_t dim, double *alpha_vec_out, double *beta_vec_out, double *basis_subspace_out){
 
+    int j;
     const int i_one = 1, i_zero = 0;
     const double d_one = 1., d_zero = 0.; 
     const char opt = 'N';
@@ -139,7 +140,7 @@ void arnoldi_ddiag(const size_t N, const double *H, const double *state0, const 
 
     double beta = 0;
 
-    for(int j=1; j<=dim; j++){
+    for(j=1; j<=dim; j++){
 
         dgbmv_(&opt, (const int *) &N, (const int *) &N , &i_zero, &i_zero, &d_one, H, &i_one, (basis_subspace_out + (j -1)*N), &i_one, &d_zero, v, &i_one);
 
