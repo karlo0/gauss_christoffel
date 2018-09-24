@@ -1,7 +1,7 @@
 # Gauß-Christoffel quadrature
 
 The function `gauss_christoffel(N, w, x, total_weight, L, nodes, weights)` performs a Gauß-Christoffel quadrature rule
-to calculate for an arbitrary weight function *w\(x\)* \(*w(x) >= 0, &forall; x*\) *L* nodes
+to calculate for an arbitrary weight function *w\(x\)* \(*w(x) >= 0, &forall; x*\) `L` nodes
 <span style="font-size:1.2em;">\(</span>
   `nodes[0]` \(*=x<sub>1</sub>*\), ..., `nodes[L-1]` \(*=x<sub>L</sub>*\)
   <span style="font-size:1.2em;">\)</span>
@@ -9,21 +9,23 @@ to calculate for an arbitrary weight function *w\(x\)* \(*w(x) >= 0, &forall; x*
   <span style="font-size:1.2em;">\(</span>
 `weights[0]` \(*=w<sub>1</sub>*\), ..., `weights[L-1]` \(*=w<sub>L</sub>*\)
 <span style="font-size:1.2em;">\)</span>.
+The weight function is given to `gauss_christoffel` in discretized form by the `N`-dimensional array `w` with corresponding sampling arguments stored in the array `x`.
 The calculated weights conserve the first *L* moments of the given weight function *w\(x\)*.
-The correct scaling of all the moments is ensured by giving to the function as an input parameter the `total_weight` \(*=&#x222b; w\(x\) dx*\). For more informations about the Gauß-Christoffel quadrature rule, see <https://dlmf.nist.gov/3.5#v>.
+The correct scaling of all the moments is ensured by giving to the function the `total_weight` \(*=&#x222b; w\(x\) dx*\) as an input parameter.
+For more informations about the Gauß-Christoffel quadrature rule, see <https://dlmf.nist.gov/3.5#v>.
 <br />
 
 The Gauß-Christoffel quadrature rule can be used to: <br />
 
 (1) obtain a downsampling of any positive function that needs to conserve the first
 L moments of the function:<br />
-- 0th moment: *&Sigma;<sub>i=1,...,N</sub> w<sub>i</sub> = &#x222b; w\(x\) dx*,<br />
-- 1st moment: *&Sigma;<sub>i=1,...,N</sub> w<sub>i</sub> x<sub>i</sub> = &#x222b; w\(x\)x dx*,<br />
+- 0th moment: *&Sigma;<sub>i=1,...,L</sub> w<sub>i</sub> = &#x222b; w\(x\) dx*,<br />
+- 1st moment: *&Sigma;<sub>i=1,...,L</sub> w<sub>i</sub> x<sub>i</sub> = &#x222b; w\(x\)x dx*,<br />
 - </span>&#8942;<br />
-- Lth moment: *&Sigma;<sub>i=1,...,N</sub> w<sub>i</sub> x<sub>i</sub><sup>L</sup> = &#x222b; w\(x\)x<sup>L</sup> dx*.
+- Lth moment: *&Sigma;<sub>i=1,...,L</sub> w<sub>i</sub> x<sub>i</sub><sup>L</sup> = &#x222b; w\(x\)x<sup>L</sup> dx*.
 
 (2) calculate integrals of the form: *&#x222b; w\(x\) f\(x\) dx*,  with *w\(x\)* the weight function and *f\(x\)* an arbitray function.
-The nodes *x<sub>i</sub>* and weights *w<sub>i</sub>* obtained from the Gauß-Christoffel quadrature are then used to calculate *&Sigma;<sub>i=1,...,N</sub> w<sub>i</sub> f(x<sub>i</sub>)* that is an numerical approximation to the integral.
+The nodes *x<sub>i</sub>* and weights *w<sub>i</sub>* obtained from the Gauß-Christoffel quadrature are then used to calculate *&Sigma;<sub>i=1,...,L</sub> w<sub>i</sub> f(x<sub>i</sub>)* that is a numerical approximation to the integral.
 
 ---
 ## Usage
