@@ -18,7 +18,7 @@ extern "C" {            /* Assume C declarations for C++ */
  *  weights - the downsampled weights corresponding to the nodes, dimension L
  *
  */
-void discrete_gauss_christoffel_quadr(const size_t N, const double *w, const double *x, const double total_weight, const size_t L, double * nodes, double *weights);
+void gauss_christoffel(const size_t N, const double *w, const double *x, const double total_weight, const size_t L, double * nodes, double *weights);
 
 
 
@@ -33,7 +33,7 @@ void discrete_gauss_christoffel_quadr(const size_t N, const double *w, const dou
  *  beta_vec_out    - the secondary diagonal elements of the output matrix, dimension L-1
  *
  */
-void discrete_gauss_christoffel_quadr_pre_diag(const size_t N, const double *w, const double *x, const size_t L, double *alpha_vec_out, double *beta_vec_out);
+void gauss_christoffel_pre_diag(const size_t N, const double *w, const double *x, const size_t L, double *alpha_vec_out, double *beta_vec_out);
 
 
 

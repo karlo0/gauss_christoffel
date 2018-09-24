@@ -3,10 +3,10 @@
 The function 'discrete\_gauss\_christoffel\_quadr(N, w, x, total\_weight, L, nodes, weights)' performs a Gauß-Christoffel quadrature rule
 to calculate for an arbitrary weight function w(x) [w(x) >= 0 for all x] a number L of nodes (nodes`[0]`, ..., nodes`[L-1]`) and 
 weights (weights`[0]`, ..., weights`[L-1]`). The calculated weights conserve the first N moments of the given weight function w(x).
-For more informations about Gauß-Christoffel quadrature rule see [(https://dlmf.nist.gov/3.5#v)].
+For more informations about Gauß-Christoffel quadrature rule see (https://dlmf.nist.gov/3.5#v).
 <br />
 <br />
-The Gauß-Christoffel quadrature rule can be used: <br />
+The Gauß-Christoffel quadrature rule can be used to: <br />
 (1) to obtain a downsampling of any positive function that needs to conserve the first
 N moments of the function <br />
 ( zeroth moment == total weight: integral w(x), <br />
@@ -29,7 +29,7 @@ An extension of this example can be found under /examples/gauss/gauss.c
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "discrete_gauss_christoffel_quadr.h"
+#include "gauss_christoffel.h"
 
 
 int main(){
@@ -56,7 +56,7 @@ int main(){
     double nodes[dim], weights[dim];
 
     // call the the Gauß-Christoffel quadrature rule function
-    discrete_gauss_christoffel_quadr(NN+1, w, x, 1., dim, nodes, weights);
+    gauss_christoffel(NN+1, w, x, 1., dim, nodes, weights);
 
     F = fopen("gauss_downsample_N5.txt","w+");                              // output the gaussian in the file "gauss_downsample_N5.txt"
     for(int k=0; k<dim; k++)

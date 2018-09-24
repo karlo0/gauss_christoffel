@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "discrete_gauss_christoffel_quadr.h"
+#include "gauss_christoffel.h"
 
 
 int main(){
@@ -30,7 +30,7 @@ int main(){
 
     int dim = 5;
     double nodes[dim], weights[dim];
-    discrete_gauss_christoffel_quadr(NN+1, w, x, M_PI, dim, nodes, weights);
+    gauss_christoffel(NN+1, w, x, M_PI, dim, nodes, weights);
 
     F = fopen("sin_squared_downsample_N5.txt","w+");
     for(int k=0; k<dim; k++)
@@ -41,7 +41,7 @@ int main(){
 
     dim = 30;
     double nodes2[dim], weights2[dim];
-    discrete_gauss_christoffel_quadr(NN+1, w, x, M_PI, dim, nodes2, weights2);
+    gauss_christoffel(NN+1, w, x, M_PI, dim, nodes2, weights2);
 
     F = fopen("sin_squared_downsample_N100.txt","w+");
     for(int k=0; k<dim; k++){

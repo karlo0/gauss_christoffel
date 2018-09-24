@@ -2,7 +2,7 @@
 #include <math.h>
 #include <float.h>
 #include <string.h>
-#include "discrete_gauss_christoffel_quadr.h"
+#include "gauss_christoffel.h"
 
 
 
@@ -17,7 +17,7 @@
  *  weights - the downsampled weights corresponding to the nodes, dimension L
  *
  */
-void discrete_gauss_christoffel_quadr(const size_t N, const double *w, const double *x, const double total_weight, const size_t L, double * nodes, double *weights){
+void gauss_christoffel(const size_t N, const double *w, const double *x, const double total_weight, const size_t L, double * nodes, double *weights){
 
     int k;
     const int i_one = 1, i_zero = 0;
@@ -53,7 +53,7 @@ void discrete_gauss_christoffel_quadr(const size_t N, const double *w, const dou
     double *beta_vec = (double *) malloc((L-1)*sizeof(double));
 
     // perform discretization and obtain tridiagonal Jacobi matrix
-    discrete_gauss_christoffel_quadr_pre_diag(N, w_scal, x_scal, L, nodes, beta_vec);
+    gauss_christoffel_pre_diag(N, w_scal, x_scal, L, nodes, beta_vec);
 
     const char compz = 'I';
     double *ev = (double *) malloc(L*L*sizeof(double));
@@ -88,7 +88,7 @@ void discrete_gauss_christoffel_quadr(const size_t N, const double *w, const dou
  *  beta_vec_out    - the secondary diagonal elements of the output matrix, dimension L-1
  *
  */
-void discrete_gauss_christoffel_quadr_pre_diag(const size_t N, const double *w, const double *x, const size_t L, double *alpha_vec_out, double *beta_vec_out){
+void gauss_christoffel_pre_diag(const size_t N, const double *w, const double *x, const size_t L, double *alpha_vec_out, double *beta_vec_out){
 
     double *basis_subspace_out = (double *) malloc(N*L*sizeof(double ));
 
